@@ -74,15 +74,15 @@ class _UpdateContactState extends State<UpdateContact> {
                   initialValue: widget.beforeaddress,
                 ),
                 ElevatedButton(
-                  child: const Text('Update Contact'),
-                  onPressed: () {
-                    if (formkey.currentState!.validate()) {
+                    child: const Text('Update Contact'),
+                    onPressed: () {
                       ContactModel cm = ContactModel(
+                          id: widget.id!,
                           name: name!,
                           phone: phone!,
                           email: email!,
                           address: address!);
-                      contatcController.addContact(cm);
+                      contatcController.updateContact(cm);
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Contact Updated')));
 
@@ -90,9 +90,7 @@ class _UpdateContactState extends State<UpdateContact> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const Contact()));
-                    }
-                  },
-                )
+                    })
               ],
             )),
       ),

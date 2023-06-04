@@ -35,7 +35,16 @@ class ContactController {
     return contact.docs;
   }
 
-  Future updateContact() async {}
+  Future updateContact(ContactModel contactModel) async {
+    final ContactModel ctmModel = ContactModel(
+        id: contactModel.id,
+        name: contactModel.name,
+        phone: contactModel.phone,
+        email: contactModel.email,
+        address: contactModel.address);
+    await contactCollection.doc(contactModel.id).update(contactModel.toMap());
+  }
+
   Future deleteContact(String id) async {
     final contact = await contactCollection.doc(id).delete();
     return contact;
