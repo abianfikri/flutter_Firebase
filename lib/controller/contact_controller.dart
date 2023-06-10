@@ -37,6 +37,7 @@ class ContactController {
 
   Future updateContact(ContactModel contactModel) async {
     final ContactModel updateContactModel = ContactModel(
+        id: contactModel.id,
         name: contactModel.name,
         phone: contactModel.phone,
         email: contactModel.email,
