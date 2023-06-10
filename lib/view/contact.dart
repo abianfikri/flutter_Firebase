@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:project_firebase/controller/contact_controller.dart';
 import 'package:project_firebase/model/contact_model.dart';
 import 'package:project_firebase/view/add_contact.dart';
+import 'package:project_firebase/view/login.dart';
 import 'package:project_firebase/view/update_contact.dart';
 
 class Contact extends StatefulWidget {
@@ -30,9 +31,36 @@ class _ContactState extends State<Contact> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Contact List',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Username',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 18)),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Login()));
+                        },
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(fontSize: 18),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Contact List',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
             Expanded(
               child: StreamBuilder<List<DocumentSnapshot>>(

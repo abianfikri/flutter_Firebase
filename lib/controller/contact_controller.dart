@@ -36,17 +36,29 @@ class ContactController {
   }
 
   Future updateContact(ContactModel contactModel) async {
-    final ContactModel ctmModel = ContactModel(
-        id: contactModel.id,
+    final ContactModel updateContactModel = ContactModel(
         name: contactModel.name,
         phone: contactModel.phone,
         email: contactModel.email,
         address: contactModel.address);
-    await contactCollection.doc(contactModel.id).update(contactModel.toMap());
+
+    // final DocumentSnapshot documentSnapshot =
+    //     await contactCollection.doc(docId).get();
+    // if (!documentSnapshot.exists) {
+    //   print('Contact with ID $docId does not exist');
+    //   return;
+    // }
+
+    // final updatedContact = updateContactModel.toMap();
+
+    await contactCollection
+        .doc(contactModel.id)
+        .update(updateContactModel.toMap());
+    await getContact();
   }
 
   Future deleteContact(String id) async {
-    final contact = await contactCollection.doc(id).delete();
-    return contact;
+    await contactCollection.doc(id).delete();
+    await getContact();
   }
 }

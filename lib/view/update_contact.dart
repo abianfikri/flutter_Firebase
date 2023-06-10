@@ -47,28 +47,28 @@ class _UpdateContactState extends State<UpdateContact> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(hintText: 'Name'),
-                  onChanged: (value) {
+                  onSaved: (value) {
                     name = value;
                   },
                   initialValue: widget.beforenama,
                 ),
                 TextFormField(
                   decoration: InputDecoration(hintText: 'Phone'),
-                  onChanged: (value) {
+                  onSaved: (value) {
                     phone = value;
                   },
                   initialValue: widget.beforephone,
                 ),
                 TextFormField(
                   decoration: InputDecoration(hintText: 'Email'),
-                  onChanged: (value) {
+                  onSaved: (value) {
                     email = value;
                   },
                   initialValue: widget.beforeemail,
                 ),
                 TextFormField(
                   decoration: InputDecoration(hintText: 'Address'),
-                  onChanged: (value) {
+                  onSaved: (value) {
                     address = value;
                   },
                   initialValue: widget.beforeaddress,
@@ -76,20 +76,23 @@ class _UpdateContactState extends State<UpdateContact> {
                 ElevatedButton(
                     child: const Text('Update Contact'),
                     onPressed: () {
-                      ContactModel cm = ContactModel(
-                          id: widget.id!,
-                          name: name!,
-                          phone: phone!,
-                          email: email!,
-                          address: address!);
-                      contatcController.updateContact(cm);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Contact Updated')));
+                      if (formkey.currentState!.validate()) {
+                        formkey.currentState!.save();
+                        ContactModel cm = ContactModel(
+                            id: widget.id!,
+                            name: name!,
+                            phone: phone!,
+                            email: email!,
+                            address: address!);
+                        contatcController.updateContact(cm);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Contact Updated')));
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Contact()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Contact()));
+                      }
                     })
               ],
             )),
