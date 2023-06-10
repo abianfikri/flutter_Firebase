@@ -79,7 +79,6 @@ class _UpdateContactState extends State<UpdateContact> {
                       if (formkey.currentState!.validate()) {
                         formkey.currentState!.save();
                         ContactModel cm = ContactModel(
-                            id: widget.id!,
                             name: name!,
                             phone: phone!,
                             email: email!,
